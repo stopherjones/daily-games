@@ -1,0 +1,391 @@
+/* ── Design System & Variables ── */
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #23263a;
+  --border: #2e3250;
+  --accent: #4f8ef7;
+  --classic: #7c5cfc;
+  --vintage: #f5a623;
+  --modern: #27ae60;
+  --unknown: #888;
+  --text: #e8eaf6;
+  --muted: #9095b4;
+  --gold: #f5c842;
+  --silver: #b0bec5;
+  --bronze: #cd7f32;
+  --success: #2e7d32;
+}
+
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── Layout & Core Containers ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 32px;
+}
+
+/* ── Header ── */
+.main-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.header-container h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.header-container p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ── Controls Toolbar ── */
+.controls-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* Form Fields */
+.search-box input[type="text"],
+.filter-box select {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-box input[type="text"]:focus,
+.filter-box select:focus {
+  border-color: var(--accent);
+}
+
+/* Toggle Switch Setup */
+.toggle-box label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-box input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Action Buttons */
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
+}
+
+.btn-accent:active {
+  transform: scale(0.98);
+}
+
+/* ── Games Responsive Grid ── */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* Game Card Components */
+.game-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Highlight Animation Hook (from Random button functionality) */
+.game-card.highlighted {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+  animation: pulseHighlight 1.5s ease-in-out;
+}
+
+@keyframes pulseHighlight {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.card-header h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-desc {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* Dynamic State Categorisation Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tag-word { background: var(--classic); color: #fff; }
+.tag-logic { background: var(--vintage); color: #fff; }
+.tag-geography { background: var(--modern); color: #fff; }
+
+/* Card Footers & Actions */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.btn-play {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.btn-play:hover {
+  text-decoration: underline;
+}
+
+.btn-status-toggle {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-status-toggle:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* Completed Card Modifiers */
+.game-card.state-completed {
+  opacity: 0.55;
+}
+
+.btn-status-toggle.completed {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+
+/* ── Miscellaneous Visual Elements ── */
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+/* ── Streaks & Performance Table ── */
+.leaderboard-section h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.table-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.ranking-table th, 
+.ranking-table td {
+  padding: 14px 20px;
+}
+
+.ranking-table th {
+  background: var(--surface2);
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ranking-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.ranking-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Hidden Gem Hook Integration */
+.rank-1 { color: var(--gold); font-weight: 700; }
+.rank-2 { color: var(--silver); font-weight: 600; }
+.rank-3 { color: var(--bronze); font-weight: 600; }
+
+/* ── Footer ── */
+.main-footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+
+/* ── Global State Utility Classes (Inherited From Base Engine) ── */
+.empty { 
+  text-align: center; 
+  color: var(--muted); 
+  padding: 60px 0; 
+  font-size: 1rem; 
+  grid-column: 1 / -1;
+}
+
+.loading { 
+  text-align: center; 
+  padding: 80px; 
+  color: var(--muted); 
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  width: 40px; 
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin { 
+  to { transform: rotate(360deg); } 
+}
+
+/* ── Responsive Adaptation Breakpoints ── */
+@media (max-width: 768px) {
+  .main-header {
+    padding: 16px;
+  }
+  
+  .container {
+    padding: 16px;
+  }
+
+  .controls-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+  
+  .search-box {
+    min-width: 100%;
+  }
+  
+  .btn-accent {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,182 @@
+(function () {
+  // ── Application State ──────────────────────────────────────────────────────
+  let gamesData = []; // Populated asynchronously via fetch
+  let currentSearch = '';
+  let currentCategory = 'all';
+  let currentDuration = 'all';
+  let currentEssentialOnly = false;
+  let currentHideCompleted = false;
+
+  // ── Core Engine Init ───────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    loadGamesDataset();
+  });
+
+  // ── Asynchronous Data Loading ──────────────────────────────────────────────
+  async function loadGamesDataset() {
+    const grid = document.getElementById('games-grid');
+    try {
+      const response = await fetch('games.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error status code: ${response.status}`);
+      }
+      gamesData = await response.json();
+      
+      // Initialise control filters and presentation layer once data arrives
+      populateCategories();
+      initEventListeners();
+      renderGrid();
+    } catch (error) {
+      console.error('Failed to load games data:', error);
+      if (grid) {
+        grid.innerHTML = `
+          <div class="empty" style="color: #ff6b6b;">
+            <p><strong>Initialization Error:</strong> Could not load games data matrix.</p>
+            <p style="font-size: 0.8rem; margin-top: 8px; color: var(--muted);">
+              Ensure you are running a local web server environment rather than double-clicking the raw HTML file.
+            </p>
+          </div>`;
+      }
+    }
+  }
+
+  // ── Populate Categories Dynamic Dropdown ──────────────────────────────────
+  function populateCategories() {
+    const select = document.getElementById('category-filter');
+    if (!select) return;
+
+    // Extract unique sorted categories
+    const categories = [...new Set(gamesData.map(g => g.category))].sort();
+    
+    categories.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat;
+      opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+      select.appendChild(opt);
+    });
+  }
+
+  // ── Setup Controls Event Binding ──────────────────────────────────────────
+  function initEventListeners() {
+    bindInput('game-search', (v) => currentSearch = v.trim().toLowerCase(), 'input');
+    bindInput('category-filter', (v) => currentCategory = v, 'change');
+    bindInput('duration-filter', (v) => currentDuration = v, 'change');
+    bindCheckbox('essential-toggle', (v) => currentEssentialOnly = v);
+    bindCheckbox('hide-completed-toggle', (v) => currentHideCompleted = v);
+
+    const randomBtn = document.getElementById('random-game-btn');
+    if (randomBtn) {
+      randomBtn.addEventListener('click', selectRandomGame);
+    }
+  }
+
+  function bindInput(id, updateFn, eventType) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener(eventType, () => { updateFn(el.value); renderGrid(); });
+  }
+
+  function bindCheckbox(id, updateFn) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', () => { updateFn(el.checked); renderGrid(); });
+  }
+
+  // ── Filtering Logic & Rendering ──────────────────────────────────────────
+  function renderGrid() {
+    const grid = document.getElementById('games-grid');
+    if (!grid) return;
+
+    const filteredGames = gamesData.filter(game => {
+      const matchesSearch = game.name.toLowerCase().includes(currentSearch) || 
+                            game.description.toLowerCase().includes(currentSearch);
+      const matchesCategory = currentCategory === 'all' || game.category === currentCategory;
+      const matchesDuration = currentDuration === 'all' || game.duration === currentDuration;
+      const matchesEssential = !currentEssentialOnly || game.daily_essential;
+      
+      const isCompleted = localStorage.getItem(`completed_${game.id}`) === 'true';
+      const matchesCompleted = !currentHideCompleted || !isCompleted;
+
+      return matchesSearch && matchesCategory && matchesDuration && matchesEssential && matchesCompleted;
+    });
+
+    if (filteredGames.length === 0) {
+      grid.innerHTML = `<div class="empty"><p>No games match your active layout criteria filters.</p></div>`;
+      return;
+    }
+
+    grid.innerHTML = filteredGames.map(game => {
+      const isCompleted = localStorage.getItem(`completed_${game.id}`) === 'true';
+      const clickCount = localStorage.getItem(`clicks_${game.id}`) || 0;
+      
+      return `
+        <article class="game-card ${isCompleted ? 'state-completed' : ''}" 
+                 id="card-${game.id}"
+                 data-category="${escAttr(game.category)}" 
+                 data-duration="${escAttr(game.duration)}" 
+                 data-essential="${game.daily_essential}">
+          <div class="card-header">
+            <div>
+              <h3>${escHtml(game.name)} ${game.daily_essential ? '<span class="essential-star" title="Daily Essential">⭐</span>' : ''}</h3>
+              <span class="meta-duration" style="font-size:0.78rem; color:var(--muted); display:block; margin-top:2px;">${escHtml(game.duration)}</span>
+            </div>
+            <span class="badge tag-${escAttr(game.category)}">${escHtml(game.category)}</span>
+          </div>
+          <p class="card-desc">${escHtml(game.description)}</p>
+          <div class="click-counter-badge" style="font-size:0.75rem; color:var(--muted); margin-bottom:12px;">
+             ⚡ Played: <span id="count-val-${game.id}">${clickCount}</span> times
+          </div>
+          <div class="card-footer">
+            <a href="${escAttr(game.url)}" target="_blank" class="btn-play" onclick="window.AppEngine.trackClick('${game.id}')">Play Game</a>
+            <button class="btn-status-toggle ${isCompleted ? 'completed' : ''}" 
+                    onclick="window.AppEngine.toggleComplete('${game.id}')">
+              ${isCompleted ? 'Done ✓' : 'Mark Done'}
+            </button>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  // ── Surprise Me Interactivity ─────────────────────────────────────────────
+  function selectRandomGame() {
+    const cards = document.querySelectorAll('.game-card:not(.state-completed)');
+    if (cards.length === 0) return;
+
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    const targetCard = cards[randomIndex];
+
+    document.querySelectorAll('.game-card').forEach(c => c.classList.remove('highlighted'));
+    targetCard.classList.add('highlighted');
+    targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ── Global Namespace Bridging ─────────────────────────────────────────────
+  window.AppEngine = {
+    toggleComplete: function(id) {
+      const key = `completed_${id}`;
+      const currentState = localStorage.getItem(key) === 'true';
+      localStorage.setItem(key, !currentState);
+      renderGrid();
+    },
+    trackClick: function(id) {
+      const key = `clicks_${id}`;
+      let currentClicks = parseInt(localStorage.getItem(key)) || 0;
+      currentClicks++;
+      localStorage.setItem(key, currentClicks);
+      
+      const countEl = document.getElementById(`count-val-${id}`);
+      if (countEl) countEl.textContent = currentClicks;
+    }
+  };
+
+  // ── Utilities ─────────────────────────────────────────────────────────────
+  function escHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Changed to correctly clean up single quotes if they show up in programmatic fields
+  function escAttr(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+})();
