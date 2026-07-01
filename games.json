@@ -132,6 +132,18 @@
     "url": "https://cluesbysam.com/",
     "mechanic": "puzzle solving"
   },
+    {
+    "id": "pokle",
+    "name": "Pokle",
+    "category": [
+      "deduction"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": true,
+    "description": "Find the hidden poker cards.",
+    "url": "https://poklegame.com/",
+    "mechanic": "puzzle solving"
+  },
   {
     "id": "wikispeedrun",
     "name": "Wiki Speedrun",

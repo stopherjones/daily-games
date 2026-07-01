@@ -328,6 +328,21 @@ body {
   color: var(--text);
 }
 
+.game-title-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.game-title-link:visited {
+  color: #ffd54f;
+}
+
+.game-title-link:hover,
+.game-title-link:focus {
+  color: #ffecb3;
+  text-decoration: underline;
+}
+
 .card-desc {
   color: var(--muted);
   font-size: 0.88rem;
