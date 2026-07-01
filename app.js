@@ -117,6 +117,11 @@
       randomBtn.addEventListener('click', selectRandomGame);
     }
 
+    const resetDoneBtn = document.getElementById('reset-done-btn');
+    if (resetDoneBtn) {
+      resetDoneBtn.addEventListener('click', resetCompletedStatuses);
+    }
+
     setupLeaderboardSorting();
   }
 
@@ -324,6 +329,17 @@
     document.querySelectorAll('.game-card').forEach(c => c.classList.remove('highlighted'));
     targetCard.classList.add('highlighted');
     targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetCompletedStatuses() {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('completed_')) {
+        localStorage.removeItem(key);
+      }
+    }
+
+    renderGrid();
   }
 
   // ── Global Namespace Bridging ─────────────────────────────────────────────
