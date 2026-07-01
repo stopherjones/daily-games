@@ -7,7 +7,7 @@
     ],
     "duration": "Quick games",
     "daily_essential": true,
-    "description": "Guess the country flag based on geographical indicators and flag overlays.",
+    "description": "Guess the country flag - each guess reveals overlapping details.",
     "url": "https://flagle-game.com/daily",
     "mechanic": "zero-in guessing"
   },
@@ -20,11 +20,23 @@
     ],
     "duration": "Medium",
     "daily_essential": true,
-    "description": "Deduce the precise location and historical year of random photographs.",
+    "description": "Guess the year and location of historical photographs.",
     "url": "https://timeguessr.com/",
     "mechanic": "map navigation"
   },
-    {
+  {
+    "id": "timdle",
+    "name": "Timdle",
+    "category": [
+      "history"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": false,
+    "description": "Place historical events on a timeline.",
+    "url": "https://www.timdle.com/",
+    "mechanic": "quiz"
+  },
+  {
     "id": "geodle",
     "name": "Geodle",
     "category": [
@@ -44,7 +56,7 @@
     ],
     "duration": "Medium",
     "daily_essential": false,
-    "description": "Find the shortest transit path between two countries by naming border links.",
+    "description": "Find the fewest border crossings between two countries.",
     "url": "https://capitalle.app/travle",
     "mechanic": "map navigation"
   },
@@ -56,7 +68,7 @@
     ],
     "duration": "Medium",
     "daily_essential": true,
-    "description": "Solve a daily trivia puzzle by identifying connecting target layers.",
+    "description": "Daily quizzes on a variety of themes and mechanics.",
     "url": "https://dailyorbs.com/",
     "mechanic": "quiz"
   },
@@ -68,7 +80,7 @@
     ],
     "duration": "Quick games",
     "daily_essential": true,
-    "description": "Identify obscure general knowledge targets based on narrowing clues.",
+    "description": "Find the pointless answers for today's topic.",
     "url": "https://www.playseldom.com/",
     "mechanic": "quiz"
   },
@@ -80,7 +92,7 @@
     ],
     "duration": "Quick games",
     "daily_essential": true,
-    "description": "Face the classic clock challenge to solve letter anagrams and number math matrices.",
+    "description": "Classic countdown letters, numbers and conundrum games.",
     "url": "https://countdown.ftwinston.com/",
     "mechanic": "puzzle solving"
   },
@@ -92,7 +104,7 @@
     ],
     "duration": "Quick games",
     "daily_essential": true,
-    "description": "Identify popular musical tracks from isolated instrumental layers.",
+    "description": "Guess the song as each instrumental layer is revealed.",
     "url": "https://bandle.app/menu",
     "mechanic": "listen to a song"
   },
@@ -104,7 +116,7 @@
     ],
     "duration": "Quick games",
     "daily_essential": true,
-    "description": "Guess the target music artist using sparse clues and limited structural reveals.",
+    "description": "Guess the song from increasing audio snippets.",
     "url": "https://lessgames.com/songless",
     "mechanic": "listen to a song"
   },
@@ -116,7 +128,7 @@
     ],
     "duration": "Quick games",
     "daily_essential": true,
-    "description": "Name the daily track by listening to progressively longer audio intro clips.",
+    "description": "Guess the song from increasing audio snippets.",
     "url": "https://www.heardle.info",
     "mechanic": "listen to a song"
   },
@@ -128,7 +140,7 @@
     ],
     "duration": "Deeper thinking",
     "daily_essential": false,
-    "description": "Use cryptic data coordinates and deep logic to crack the hidden daily code.",
+    "description": "Find the treasure using logic clues and sudoku deduction.",
     "url": "https://clueraider.com/",
     "mechanic": "puzzle solving"
   },
@@ -140,7 +152,7 @@
     ],
     "duration": "Deeper thinking",
     "daily_essential": false,
-    "description": "Break down intricate logical deduction grids to uncover a hidden solution matrix.",
+    "description": "Follow the logic clues to find the criminals and innocents.",
     "url": "https://cluesbysam.com/",
     "mechanic": "puzzle solving"
   },
@@ -164,7 +176,7 @@
     ],
     "duration": "Medium",
     "daily_essential": false,
-    "description": "Navigate between arbitrary Wikipedia entries in the fewest possible link clicks.",
+    "description": "Navigate between Wikipedia entries in the fewest possible link clicks.",
     "url": "https://wikispeedrun.io/",
     "mechanic": "zero-in guessing"
   },
@@ -176,7 +188,7 @@
     ],
     "duration": "Deeper thinking",
     "daily_essential": false,
-    "description": "Uncover hidden terms and context in an entirely redacted Wikipedia article.",
+    "description": "Work out the random Wikipedia article by revealing redacted words.",
     "url": "https://redactle.net/",
     "mechanic": "zero-in guessing"
   },
@@ -200,7 +212,7 @@
     ],
     "duration": "Deeper thinking",
     "daily_essential": false,
-    "description": "Guess the daily secret noun using strategic conceptual indicators.",
+    "description": "Find the hidden proper noun - each guess is scored based on its closeness.",
     "url": "https://nounable.me/",
     "mechanic": "zero-in guessing"
   },
@@ -212,7 +224,7 @@
     ],
     "duration": "Deeper thinking",
     "daily_essential": false,
-    "description": "Find the daily hidden word using semantic similarity score data.",
+    "description": "Find the hidden word - each guess is scored based on its closeness.",
     "url": "https://semantle.com/",
     "mechanic": "zero-in guessing"
   },
@@ -236,32 +248,8 @@
     ],
     "duration": "Quick games",
     "daily_essential": false,
-    "description": "Guess the daily actor by parsing through an anonymised list of their IMDb filmography.",
+    "description": "Guess the daily actor by revealing their filmography.",
     "url": "https://actorle.com/?homescreen=1",
     "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "guardiancryptic",
-    "name": "Guardian Cryptic Crossword",
-    "category": [
-      "words"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Solve intricate, multi-layered wordplay clues in the classic British newspaper layout.",
-    "url": "https://www.theguardian.com/crosswords/series/cryptic",
-    "mechanic": "crossword"
-  },
-  {
-    "id": "lexisrexfrench",
-    "name": "Lexis Rex French",
-    "category": [
-      "words"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Test and build foreign vocabulary with daily custom word grids and language puzzles.",
-    "url": "https://www.lexisrex.com/French",
-    "mechanic": "crossword"
   }
 ]
