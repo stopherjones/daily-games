@@ -421,9 +421,15 @@ body {
 .card-footer {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   margin-top: auto;
+}
+
+.card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .badge-list {

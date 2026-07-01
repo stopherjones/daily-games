@@ -25,6 +25,17 @@
                     <span class="summary-icon">▾</span>
                 </summary>
                 <div class="filter-panel">
+                    <div class="control-group filter-box">
+                        <select id="sort-filter">
+                            <option value="auto">Sort by: Play count high to low</option>
+                            <option value="plays-desc">Play count high to low</option>
+                            <option value="plays-asc">Play count low to high</option>
+                            <option value="name-asc">Name A-Z</option>
+                            <option value="name-desc">Name Z-A</option>
+                            <option value="lastplayed-asc">Last played oldest to newest</option>
+                            <option value="lastplayed-desc">Last played newest to oldest</option>
+                        </select>
+                    </div>
                     <div class="control-group search-box">
                         <input type="text" id="game-search" placeholder="Search games by name or description...">
                     </div>
@@ -74,28 +85,6 @@
         </section>
 
         <hr class="section-divider">
-
-        <section class="leaderboard-section">
-            <h2>Play count</h2>
-            <div class="table-container">
-                <table class="ranking-table">
-                    <thead>
-                        <tr>
-                            <th id="leaderboard-played-header" scope="col" class="sortable-header" aria-sort="descending">
-                                Played <span class="sort-indicator">▼</span>
-                            </th>
-                            <th id="leaderboard-name-header" scope="col" class="sortable-header" aria-sort="none">
-                                Game Name <span class="sort-indicator"></span>
-                            </th>
-                            <th id="leaderboard-lastplayed-header" scope="col" class="sortable-header" aria-sort="none">
-                                Last Played <span class="sort-indicator"></span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboard-body"></tbody>
-                </table>
-            </div>
-        </section>
 
     </main>
 

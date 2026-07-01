@@ -5,10 +5,9 @@
   let currentCategory = 'all';
   let currentMechanic = 'all';
   let currentDuration = 'all';
+  let currentSortOption = 'auto';
   let currentEssentialOnly = false;
   let currentHideCompleted = false;
-  let leaderboardSortBy = 'clicks';
-  let leaderboardSortDirection = 'desc';
 
   // ── Core Engine Init ───────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +43,6 @@
       populateDurations();
       initEventListeners();
       renderGrid();
-      renderLeaderboard();
     } catch (error) {
       console.error('Failed to load games data:', error);
       if (grid) {
@@ -105,6 +103,7 @@
 
   // ── Setup Controls Event Binding ──────────────────────────────────────────
   function initEventListeners() {
+    bindInput('sort-filter', (v) => currentSortOption = v, 'change');
     bindInput('game-search', (v) => currentSearch = v.trim().toLowerCase(), 'input');
     bindInput('category-filter', (v) => currentCategory = v, 'change');
     bindInput('mechanic-filter', (v) => currentMechanic = v, 'change');
@@ -121,31 +120,6 @@
     if (resetDoneBtn) {
       resetDoneBtn.addEventListener('click', resetCompletedStatuses);
     }
-
-    setupLeaderboardSorting();
-  }
-
-  function setupLeaderboardSorting() {
-    const playedHeader = document.getElementById('leaderboard-played-header');
-    const nameHeader = document.getElementById('leaderboard-name-header');
-
-    const bindHeader = (element, sortField) => {
-      if (!element) return;
-      element.addEventListener('click', () => {
-        if (leaderboardSortBy === sortField) {
-          leaderboardSortDirection = leaderboardSortDirection === 'desc' ? 'asc' : 'desc';
-        } else {
-          leaderboardSortBy = sortField;
-          leaderboardSortDirection = sortField === 'clicks' ? 'desc' : 'asc';
-        }
-        renderLeaderboard();
-      });
-    };
-
-    bindHeader(playedHeader, 'clicks');
-    bindHeader(nameHeader, 'name');
-    const lastPlayedHeader = document.getElementById('leaderboard-lastplayed-header');
-    bindHeader(lastPlayedHeader, 'lastPlayed');
   }
 
   function bindInput(id, updateFn, eventType) {
@@ -175,6 +149,36 @@
       const matchesCompleted = !currentHideCompleted || !isCompleted;
 
       return matchesSearch && matchesCategory && matchesMechanic && matchesDuration && matchesEssential && matchesCompleted;
+    }).sort((a, b) => {
+      const aPlays = parseInt(localStorage.getItem(`clicks_${a.id}`), 10) || 0;
+      const bPlays = parseInt(localStorage.getItem(`clicks_${b.id}`), 10) || 0;
+      const aLast = localStorage.getItem(`lastPlayed_${a.id}`);
+      const bLast = localStorage.getItem(`lastPlayed_${b.id}`);
+      const aTime = aLast ? Date.parse(aLast) : 0;
+      const bTime = bLast ? Date.parse(bLast) : 0;
+
+      switch (currentSortOption) {
+        case 'plays-asc':
+          if (aPlays !== bPlays) return aPlays - bPlays;
+          return a.name.localeCompare(b.name);
+        case 'name-asc':
+          if (a.name !== b.name) return a.name.localeCompare(b.name);
+          return bPlays - aPlays;
+        case 'name-desc':
+          if (a.name !== b.name) return b.name.localeCompare(a.name);
+          return bPlays - aPlays;
+        case 'lastplayed-asc':
+          if (aTime !== bTime) return aTime - bTime;
+          return a.name.localeCompare(b.name);
+        case 'lastplayed-desc':
+          if (aTime !== bTime) return bTime - aTime;
+          return a.name.localeCompare(b.name);
+        case 'plays-desc':
+        case 'auto':
+        default:
+          if (aPlays !== bPlays) return bPlays - aPlays;
+          return a.name.localeCompare(b.name);
+      }
     });
 
     if (filteredGames.length === 0) {
@@ -185,6 +189,8 @@
     grid.innerHTML = filteredGames.map(game => {
       const isCompleted = localStorage.getItem(`completed_${game.id}`) === 'true';
       const clickCount = localStorage.getItem(`clicks_${game.id}`) || 0;
+      const lastPlayedValue = localStorage.getItem(`lastPlayed_${game.id}`);
+      const lastPlayedText = lastPlayedValue ? formatLastPlayed(lastPlayedValue) : 'Never';
       
       return `
         <article class="game-card ${isCompleted ? 'state-completed' : ''}" 
@@ -205,8 +211,13 @@
           </div>
           <p class="card-desc">${escHtml(game.description)}</p>
           <div class="card-footer">
-            <div class="click-counter-badge">
-               ⚡ Played: <span id="count-val-${game.id}">${clickCount}</span> times
+            <div class="card-stats">
+              <div class="click-counter-badge">
+                ⚡ Played: <span id="count-val-${game.id}">${clickCount}</span> times
+              </div>
+              <div class="click-counter-badge">
+                🕒 Last played: ${escHtml(lastPlayedText)}
+              </div>
             </div>
             <button class="btn-status-toggle ${isCompleted ? 'completed' : ''}" 
                     onclick="window.AppEngine.toggleComplete('${game.id}')">
@@ -216,59 +227,6 @@
         </article>
       `;
     }).join('');
-
-    renderLeaderboard();
-  }
-
-  function renderLeaderboard() {
-    const tbody = document.getElementById('leaderboard-body');
-    if (!tbody) return;
-
-    const leaderboardRows = gamesData.map(game => {
-      const clickCount = parseInt(localStorage.getItem(`clicks_${game.id}`), 10) || 0;
-      const lastPlayedKey = localStorage.getItem(`lastPlayed_${game.id}`);
-      return {
-        name: game.name,
-        clicks: clickCount,
-        lastPlayed: lastPlayedKey ? formatLastPlayed(lastPlayedKey) : '—',
-        lastPlayedRaw: lastPlayedKey || ''
-      };
-    });
-
-    leaderboardRows.sort((a, b) => {
-      if (leaderboardSortBy === 'clicks') {
-        const countDelta = a.clicks - b.clicks;
-        if (countDelta !== 0) {
-          return leaderboardSortDirection === 'desc' ? -countDelta : countDelta;
-        }
-        return a.name.localeCompare(b.name);
-      }
-
-      if (leaderboardSortBy === 'name') {
-        const nameDelta = a.name.localeCompare(b.name);
-        if (nameDelta !== 0) {
-          return leaderboardSortDirection === 'desc' ? -nameDelta : nameDelta;
-        }
-        return b.clicks - a.clicks;
-      }
-
-      const aTime = a.lastPlayedRaw ? Date.parse(a.lastPlayedRaw) : 0;
-      const bTime = b.lastPlayedRaw ? Date.parse(b.lastPlayedRaw) : 0;
-      if (aTime !== bTime) {
-        return leaderboardSortDirection === 'desc' ? bTime - aTime : aTime - bTime;
-      }
-      return a.name.localeCompare(b.name);
-    });
-
-    updateLeaderboardHeaderState();
-
-    tbody.innerHTML = leaderboardRows.map(row => `
-      <tr>
-        <td>Played: ${row.clicks} times</td>
-        <td>${escHtml(row.name)}</td>
-        <td>${row.lastPlayed}</td>
-      </tr>
-    `).join('');
   }
 
   function formatLastPlayed(value) {
@@ -282,39 +240,6 @@
       });
     } catch (err) {
       return '—';
-    }
-  }
-
-  function updateLeaderboardHeaderState() {
-    const playedHeader = document.getElementById('leaderboard-played-header');
-    const nameHeader = document.getElementById('leaderboard-name-header');
-    const lastPlayedHeader = document.getElementById('leaderboard-lastplayed-header');
-
-    if (playedHeader) {
-      const indicator = playedHeader.querySelector('.sort-indicator');
-      const active = leaderboardSortBy === 'clicks';
-      playedHeader.setAttribute('aria-sort', active ? (leaderboardSortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
-      if (indicator) {
-        indicator.textContent = active ? (leaderboardSortDirection === 'desc' ? '▼' : '▲') : '';
-      }
-    }
-
-    if (nameHeader) {
-      const indicator = nameHeader.querySelector('.sort-indicator');
-      const active = leaderboardSortBy === 'name';
-      nameHeader.setAttribute('aria-sort', active ? (leaderboardSortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
-      if (indicator) {
-        indicator.textContent = active ? (leaderboardSortDirection === 'desc' ? '▼' : '▲') : '';
-      }
-    }
-
-    if (lastPlayedHeader) {
-      const indicator = lastPlayedHeader.querySelector('.sort-indicator');
-      const active = leaderboardSortBy === 'lastPlayed';
-      lastPlayedHeader.setAttribute('aria-sort', active ? (leaderboardSortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
-      if (indicator) {
-        indicator.textContent = active ? (leaderboardSortDirection === 'desc' ? '▼' : '▲') : '';
-      }
     }
   }
 
