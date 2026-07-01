@@ -24,6 +24,18 @@
     "url": "https://timeguessr.com/",
     "mechanic": "map navigation"
   },
+    {
+    "id": "geodle",
+    "name": "Geodle",
+    "category": [
+      "geography"
+    ],
+    "duration": "Quick games",
+    "daily_essential": true,
+    "description": "Work out the country from continent, population, and other clues.",
+    "url": "https://geodle.me/",
+    "mechanic": "zero-in guessing"
+  },
   {
     "id": "travle",
     "name": "travle",
@@ -79,7 +91,7 @@
       "music"
     ],
     "duration": "Quick games",
-    "daily_essential": false,
+    "daily_essential": true,
     "description": "Identify popular musical tracks from isolated instrumental layers.",
     "url": "https://bandle.app/menu",
     "mechanic": "listen to a song"
@@ -91,7 +103,7 @@
       "music"
     ],
     "duration": "Quick games",
-    "daily_essential": false,
+    "daily_essential": true,
     "description": "Guess the target music artist using sparse clues and limited structural reveals.",
     "url": "https://lessgames.com/songless",
     "mechanic": "listen to a song"
@@ -103,7 +115,7 @@
       "music"
     ],
     "duration": "Quick games",
-    "daily_essential": false,
+    "daily_essential": true,
     "description": "Name the daily track by listening to progressively longer audio intro clips.",
     "url": "https://www.heardle.info",
     "mechanic": "listen to a song"
