@@ -11,31 +11,35 @@
     <header class="main-header">
         <div class="header-container">
             <h1>Daily Games Hub</h1>
-            <p>Track, play, and smash your daily mental puzzle lineup.</p>
         </div>
-    </header>
-
-    <main class="container">
 
         <section class="controls-toolbar" aria-label="Game filters">
-            
-            <div class="control-group search-box">
-                <input type="text" id="game-search" placeholder="Search games by name or description...">
-            </div>
-            
-            <div class="control-group filter-box">
-                <select id="category-filter">
-                    <option value="all">All Categories</option>
-                </select>
-            </div>
-
-            <div class="control-group filter-box">
-                <select id="duration-filter">
-                    <option value="all">All Durations</option>
-                    <option value="Quick games">Quick Games</option>
-                    <option value="Deeper thinking">Deeper Thinking</option>
-                </select>
-            </div>
+            <details class="filter-collapse">
+                <summary>
+                    <span>Search & filters</span>
+                    <span class="summary-icon">▾</span>
+                </summary>
+                <div class="filter-panel">
+                    <div class="control-group search-box">
+                        <input type="text" id="game-search" placeholder="Search games by name or description...">
+                    </div>
+                    <div class="control-group filter-box">
+                        <select id="category-filter">
+                            <option value="all">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="control-group filter-box">
+                        <select id="mechanic-filter">
+                            <option value="all">All Mechanics</option>
+                        </select>
+                    </div>
+                    <div class="control-group filter-box">
+                        <select id="duration-filter">
+                            <option value="all">All Durations</option>
+                        </select>
+                    </div>
+                </div>
+            </details>
 
             <div class="control-group toggle-box">
                 <label for="essential-toggle">
@@ -53,6 +57,9 @@
 
             <button id="random-game-btn" class="btn-accent">Surprise Me</button>
         </section>
+    </header>
+
+    <main class="container">
 
         <section class="games-grid" id="games-grid" aria-label="Curated Games Lineup">
             <div class="loading">

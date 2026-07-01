@@ -40,23 +40,33 @@ body {
 
 /* ── Header ── */
 .main-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 24px 32px;
+  padding: 14px 18px;
   position: sticky;
   top: 0;
   z-index: 30;
 }
 
+.header-container {
+  min-width: 0;
+}
+
 .header-container h1 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
 .header-container p {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  margin: 0;
 }
 
 /* ── Controls Toolbar ── */
@@ -64,12 +74,56 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 16px 24px;
+  padding: 10px 14px;
   border-radius: 8px;
-  margin-bottom: 32px;
+  margin: 0;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.filter-collapse {
+  width: 100%;
+}
+
+.filter-collapse summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+  color: var(--text);
+  user-select: none;
+}
+
+.filter-collapse summary::-webkit-details-marker {
+  display: none;
+}
+
+.filter-panel {
+  display: none;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.filter-collapse[open] .filter-panel {
+  display: flex;
+}
+
+.filter-collapse[open] .summary-icon {
+  transform: rotate(180deg);
+}
+
+.filter-collapse .summary-icon {
+  transition: transform 0.2s ease;
 }
 
 .control-group {
@@ -78,8 +132,64 @@ body {
 }
 
 .search-box {
-  flex: 1;
-  min-width: 260px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (min-width: 1300px) {
+  .main-header {
+    flex-wrap: nowrap;
+  }
+
+  .controls-toolbar {
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .main-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 14px;
+  }
+
+  .controls-toolbar {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .control-group,
+  .btn-accent,
+  .toggle-box {
+    width: 100%;
+  }
+
+  .toggle-box {
+    justify-content: space-between;
+  }
+
+  .btn-accent {
+    margin-top: 4px;
+  }
+}
+
+@media (max-width: 900px) {
+  .controls-toolbar {
+    padding: 8px 10px;
+  }
+
+  .filter-collapse summary {
+    padding: 10px 12px;
+  }
+
+  .filter-panel {
+    flex-direction: column;
+  }
+
+  .filter-panel .control-group {
+    width: 100%;
+  }
 }
 
 /* Form Fields */
@@ -89,7 +199,7 @@ body {
   background: var(--surface2);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 6px;
   font-family: inherit;
   font-size: 0.9rem;
@@ -205,17 +315,27 @@ body {
 /* Dynamic State Categorisation Badges */
 .badge {
   display: inline-block;
-  padding: 4px 8px;
+  padding: 3px 7px;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
-.tag-word { background: var(--classic); color: #fff; }
-.tag-logic { background: var(--vintage); color: #fff; }
-.tag-geography { background: var(--modern); color: #fff; }
+.tag-cars { background: #e67e22; color: #fff; }
+.tag-connections { background: #3498db; color: #fff; }
+.tag-deduction { background: #9b59b6; color: #fff; }
+.tag-films { background: #e84393; color: #fff; }
+.tag-geography { background: #27ae60; color: #fff; }
+.tag-guessing { background: #f39c12; color: #111; }
+.tag-history { background: #d35400; color: #fff; }
+.tag-language { background: #16a085; color: #fff; }
+.tag-logic { background: #8e44ad; color: #fff; }
+.tag-music { background: #2d3436; color: #fff; }
+.tag-trivia { background: #0984e3; color: #fff; }
+.tag-wikipedia { background: #636e72; color: #fff; }
+.tag-word { background: #f1c40f; color: #111; }
 
 /* Card Footers & Actions */
 .card-footer {
@@ -224,6 +344,18 @@ body {
   align-items: center;
   gap: 12px;
   margin-top: auto;
+}
+
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.click-counter-badge {
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .btn-play {

@@ -3,6 +3,7 @@
   let gamesData = []; // Populated asynchronously via fetch
   let currentSearch = '';
   let currentCategory = 'all';
+  let currentMechanic = 'all';
   let currentDuration = 'all';
   let currentEssentialOnly = false;
   let currentHideCompleted = false;
@@ -24,6 +25,8 @@
       
       // Initialise control filters and presentation layer once data arrives
       populateCategories();
+      populateMechanics();
+      populateDurations();
       initEventListeners();
       renderGrid();
     } catch (error) {
@@ -45,8 +48,8 @@
     const select = document.getElementById('category-filter');
     if (!select) return;
 
-    // Extract unique sorted categories
-    const categories = [...new Set(gamesData.map(g => g.category))].sort();
+    // Extract unique sorted categories from arrays or strings
+    const categories = [...new Set(gamesData.flatMap(g => Array.isArray(g.category) ? g.category : [g.category]))].filter(Boolean).sort();
     
     categories.forEach(cat => {
       const opt = document.createElement('option');
@@ -56,10 +59,39 @@
     });
   }
 
+  function populateMechanics() {
+    const select = document.getElementById('mechanic-filter');
+    if (!select) return;
+
+    const mechanics = [...new Set(gamesData.map(g => g.mechanic))].sort();
+
+    mechanics.forEach(mech => {
+      const opt = document.createElement('option');
+      opt.value = mech;
+      opt.textContent = mech.charAt(0).toUpperCase() + mech.slice(1);
+      select.appendChild(opt);
+    });
+  }
+
+  function populateDurations() {
+    const select = document.getElementById('duration-filter');
+    if (!select) return;
+
+    const durations = [...new Set(gamesData.map(g => g.duration))].sort();
+
+    durations.forEach(duration => {
+      const opt = document.createElement('option');
+      opt.value = duration;
+      opt.textContent = duration;
+      select.appendChild(opt);
+    });
+  }
+
   // ── Setup Controls Event Binding ──────────────────────────────────────────
   function initEventListeners() {
     bindInput('game-search', (v) => currentSearch = v.trim().toLowerCase(), 'input');
     bindInput('category-filter', (v) => currentCategory = v, 'change');
+    bindInput('mechanic-filter', (v) => currentMechanic = v, 'change');
     bindInput('duration-filter', (v) => currentDuration = v, 'change');
     bindCheckbox('essential-toggle', (v) => currentEssentialOnly = v);
     bindCheckbox('hide-completed-toggle', (v) => currentHideCompleted = v);
@@ -88,14 +120,15 @@
     const filteredGames = gamesData.filter(game => {
       const matchesSearch = game.name.toLowerCase().includes(currentSearch) || 
                             game.description.toLowerCase().includes(currentSearch);
-      const matchesCategory = currentCategory === 'all' || game.category === currentCategory;
+      const matchesCategory = currentCategory === 'all' || (Array.isArray(game.category) ? game.category.includes(currentCategory) : game.category === currentCategory);
+      const matchesMechanic = currentMechanic === 'all' || game.mechanic === currentMechanic;
       const matchesDuration = currentDuration === 'all' || game.duration === currentDuration;
       const matchesEssential = !currentEssentialOnly || game.daily_essential;
       
       const isCompleted = localStorage.getItem(`completed_${game.id}`) === 'true';
       const matchesCompleted = !currentHideCompleted || !isCompleted;
 
-      return matchesSearch && matchesCategory && matchesDuration && matchesEssential && matchesCompleted;
+      return matchesSearch && matchesCategory && matchesMechanic && matchesDuration && matchesEssential && matchesCompleted;
     });
 
     if (filteredGames.length === 0) {
@@ -110,22 +143,25 @@
       return `
         <article class="game-card ${isCompleted ? 'state-completed' : ''}" 
                  id="card-${game.id}"
-                 data-category="${escAttr(game.category)}" 
+                 data-category="${escAttr(Array.isArray(game.category) ? game.category.join(' ') : game.category)}" 
                  data-duration="${escAttr(game.duration)}" 
                  data-essential="${game.daily_essential}">
           <div class="card-header">
             <div>
-              <h3>${escHtml(game.name)} ${game.daily_essential ? '<span class="essential-star" title="Daily Essential">⭐</span>' : ''}</h3>
+              <h3><a href="${escAttr(game.url)}" target="_blank" class="game-title-link">${escHtml(game.name)}</a> ${game.daily_essential ? '<span class="essential-star" title="Daily Essential">⭐</span>' : ''}</h3>
               <span class="meta-duration" style="font-size:0.78rem; color:var(--muted); display:block; margin-top:2px;">${escHtml(game.duration)}</span>
             </div>
-            <span class="badge tag-${escAttr(game.category)}">${escHtml(game.category)}</span>
+            <div class="badge-list">
+              ${Array.isArray(game.category)
+                ? game.category.map(cat => `<span class="badge tag-${escAttr(cat)}">${escHtml(cat)}</span>`).join(' ')
+                : `<span class="badge tag-${escAttr(game.category)}">${escHtml(game.category)}</span>`}
+            </div>
           </div>
           <p class="card-desc">${escHtml(game.description)}</p>
-          <div class="click-counter-badge" style="font-size:0.75rem; color:var(--muted); margin-bottom:12px;">
-             ⚡ Played: <span id="count-val-${game.id}">${clickCount}</span> times
-          </div>
           <div class="card-footer">
-            <a href="${escAttr(game.url)}" target="_blank" class="btn-play" onclick="window.AppEngine.trackClick('${game.id}')">Play Game</a>
+            <div class="click-counter-badge">
+               ⚡ Played: <span id="count-val-${game.id}">${clickCount}</span> times
+            </div>
             <button class="btn-status-toggle ${isCompleted ? 'completed' : ''}" 
                     onclick="window.AppEngine.toggleComplete('${game.id}')">
               ${isCompleted ? 'Done ✓' : 'Mark Done'}
@@ -152,12 +188,22 @@
   // ── Global Namespace Bridging ─────────────────────────────────────────────
   window.AppEngine = {
     toggleComplete: function(id) {
-      const key = `completed_${id}`;
-      const currentState = localStorage.getItem(key) === 'true';
-      localStorage.setItem(key, !currentState);
+      const completedKey = `completed_${id}`;
+      const clicksKey = `clicks_${id}`;
+      const currentState = localStorage.getItem(completedKey) === 'true';
+      localStorage.setItem(completedKey, !currentState);
+
+      if (!currentState) {
+        let currentClicks = parseInt(localStorage.getItem(clicksKey)) || 0;
+        currentClicks++;
+        localStorage.setItem(clicksKey, currentClicks);
+      }
+
       renderGrid();
     },
     trackClick: function(id) {
+      // Keep the original click tracker available if needed,
+      // but do not increment on link clicks by default.
       const key = `clicks_${id}`;
       let currentClicks = parseInt(localStorage.getItem(key)) || 0;
       currentClicks++;
