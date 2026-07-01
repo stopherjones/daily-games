@@ -370,10 +370,14 @@ body {
 .tag-history { background: #d35400; color: #fff; }
 .tag-language { background: #16a085; color: #fff; }
 .tag-logic { background: #8e44ad; color: #fff; }
+.tag-maths { background: #00b894; color: #fff; }
 .tag-music { background: #2d3436; color: #fff; }
+.tag-people { background: #d63031; color: #fff; }
 .tag-trivia { background: #0984e3; color: #fff; }
 .tag-wikipedia { background: #636e72; color: #fff; }
 .tag-word { background: #f1c40f; color: #111; }
+.tag-words { background: #e17055; color: #fff; }
+.tag-general-knowledge { background: #fdcb6e; color: #111; }
 
 /* Card Footers & Actions */
 .card-footer {

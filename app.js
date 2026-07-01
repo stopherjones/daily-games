@@ -194,8 +194,8 @@
             </div>
             <div class="badge-list">
               ${Array.isArray(game.category)
-                ? game.category.map(cat => `<span class="badge tag-${escAttr(cat)}">${escHtml(cat)}</span>`).join(' ')
-                : `<span class="badge tag-${escAttr(game.category)}">${escHtml(game.category)}</span>`}
+                ? game.category.map(cat => `<span class="badge tag-${escAttr(normalizeTagClass(cat))}">${escHtml(cat)}</span>`).join(' ')
+                : `<span class="badge tag-${escAttr(normalizeTagClass(game.category))}">${escHtml(game.category)}</span>`}
             </div>
           </div>
           <p class="card-desc">${escHtml(game.description)}</p>
@@ -366,5 +366,10 @@
   function escAttr(str) {
     if (!str) return '';
     return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function normalizeTagClass(value) {
+    if (!value) return '';
+    return value.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9_-]/g, '');
   }
 })();
