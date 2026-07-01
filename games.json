@@ -251,5 +251,29 @@
     "description": "Guess the daily actor by revealing their filmography.",
     "url": "https://actorle.com/?homescreen=1",
     "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "guessandmatch",
+    "name": "Guess and Match",
+    "category": [
+      "trivia"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": true,
+    "description": "Various guessing games and other trivia challenges.",
+    "url": "https://guessandmatch.com/daily/categories",
+    "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "guardian-cryptic",
+    "name": "Guardian Cryptic",
+    "category": [
+      "words"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": false,
+    "description": "Daily cryptic crosswords.",
+    "url": "https://www.theguardian.com/crosswords/series/cryptic",
+    "mechanic": "crossword"
   }
 ]
