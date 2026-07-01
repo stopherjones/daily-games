@@ -14,7 +14,7 @@
         </div>
 
         <section class="controls-toolbar" aria-label="Game filters">
-            <details class="filter-collapse">
+            <details class="filter-collapse" open>
                 <summary>
                     <span>Search & filters</span>
                     <span class="summary-icon">▾</span>
@@ -71,37 +71,23 @@
         <hr class="section-divider">
 
         <section class="leaderboard-section">
-            <h2>Current Streaks & Standings</h2>
+            <h2>Play count</h2>
             <div class="table-container">
                 <table class="ranking-table">
                     <thead>
                         <tr>
-                            <th scope="col">Rank</th>
-                            <th scope="col">Game Name</th>
-                            <th scope="col">Current Streak</th>
-                            <th scope="col">Personal Best</th>
+                            <th id="leaderboard-played-header" scope="col" class="sortable-header" aria-sort="descending">
+                                Played <span class="sort-indicator">▼</span>
+                            </th>
+                            <th id="leaderboard-name-header" scope="col" class="sortable-header" aria-sort="none">
+                                Game Name <span class="sort-indicator"></span>
+                            </th>
+                            <th id="leaderboard-lastplayed-header" scope="col" class="sortable-header" aria-sort="none">
+                                Last Played <span class="sort-indicator"></span>
+                            </th>
                         </tr>
                     </thead>
-                    <tbody id="leaderboard-body">
-                        <tr class="rank-1">
-                            <td>1</td>
-                            <td>Wordle</td>
-                            <td>18 Days</td>
-                            <td>2/6 Attempts</td>
-                        </tr>
-                        <tr class="rank-2">
-                            <td>2</td>
-                            <td>Connections</td>
-                            <td>12 Days</td>
-                            <td>Perfect Split</td>
-                        </tr>
-                        <tr class="rank-3">
-                            <td>3</td>
-                            <td>Mini Crossword</td>
-                            <td>5 Days</td>
-                            <td>0:42 Seconds</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="leaderboard-body"></tbody>
                 </table>
             </div>
         </section>

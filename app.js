@@ -7,11 +7,26 @@
   let currentDuration = 'all';
   let currentEssentialOnly = false;
   let currentHideCompleted = false;
+  let leaderboardSortBy = 'clicks';
+  let leaderboardSortDirection = 'desc';
 
   // ── Core Engine Init ───────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
     loadGamesDataset();
+    setupFilterCollapse();
   });
+
+  function setupFilterCollapse() {
+    const details = document.querySelector('.filter-collapse');
+    if (!details) return;
+
+    const updateState = () => {
+      details.open = window.innerWidth > 900;
+    };
+
+    updateState();
+    window.addEventListener('resize', updateState);
+  }
 
   // ── Asynchronous Data Loading ──────────────────────────────────────────────
   async function loadGamesDataset() {
@@ -29,6 +44,7 @@
       populateDurations();
       initEventListeners();
       renderGrid();
+      renderLeaderboard();
     } catch (error) {
       console.error('Failed to load games data:', error);
       if (grid) {
@@ -100,6 +116,31 @@
     if (randomBtn) {
       randomBtn.addEventListener('click', selectRandomGame);
     }
+
+    setupLeaderboardSorting();
+  }
+
+  function setupLeaderboardSorting() {
+    const playedHeader = document.getElementById('leaderboard-played-header');
+    const nameHeader = document.getElementById('leaderboard-name-header');
+
+    const bindHeader = (element, sortField) => {
+      if (!element) return;
+      element.addEventListener('click', () => {
+        if (leaderboardSortBy === sortField) {
+          leaderboardSortDirection = leaderboardSortDirection === 'desc' ? 'asc' : 'desc';
+        } else {
+          leaderboardSortBy = sortField;
+          leaderboardSortDirection = sortField === 'clicks' ? 'desc' : 'asc';
+        }
+        renderLeaderboard();
+      });
+    };
+
+    bindHeader(playedHeader, 'clicks');
+    bindHeader(nameHeader, 'name');
+    const lastPlayedHeader = document.getElementById('leaderboard-lastplayed-header');
+    bindHeader(lastPlayedHeader, 'lastPlayed');
   }
 
   function bindInput(id, updateFn, eventType) {
@@ -170,6 +211,106 @@
         </article>
       `;
     }).join('');
+
+    renderLeaderboard();
+  }
+
+  function renderLeaderboard() {
+    const tbody = document.getElementById('leaderboard-body');
+    if (!tbody) return;
+
+    const leaderboardRows = gamesData.map(game => {
+      const clickCount = parseInt(localStorage.getItem(`clicks_${game.id}`), 10) || 0;
+      const lastPlayedKey = localStorage.getItem(`lastPlayed_${game.id}`);
+      return {
+        name: game.name,
+        clicks: clickCount,
+        lastPlayed: lastPlayedKey ? formatLastPlayed(lastPlayedKey) : '—',
+        lastPlayedRaw: lastPlayedKey || ''
+      };
+    });
+
+    leaderboardRows.sort((a, b) => {
+      if (leaderboardSortBy === 'clicks') {
+        const countDelta = a.clicks - b.clicks;
+        if (countDelta !== 0) {
+          return leaderboardSortDirection === 'desc' ? -countDelta : countDelta;
+        }
+        return a.name.localeCompare(b.name);
+      }
+
+      if (leaderboardSortBy === 'name') {
+        const nameDelta = a.name.localeCompare(b.name);
+        if (nameDelta !== 0) {
+          return leaderboardSortDirection === 'desc' ? -nameDelta : nameDelta;
+        }
+        return b.clicks - a.clicks;
+      }
+
+      const aTime = a.lastPlayedRaw ? Date.parse(a.lastPlayedRaw) : 0;
+      const bTime = b.lastPlayedRaw ? Date.parse(b.lastPlayedRaw) : 0;
+      if (aTime !== bTime) {
+        return leaderboardSortDirection === 'desc' ? bTime - aTime : aTime - bTime;
+      }
+      return a.name.localeCompare(b.name);
+    });
+
+    updateLeaderboardHeaderState();
+
+    tbody.innerHTML = leaderboardRows.map(row => `
+      <tr>
+        <td>Played: ${row.clicks} times</td>
+        <td>${escHtml(row.name)}</td>
+        <td>${row.lastPlayed}</td>
+      </tr>
+    `).join('');
+  }
+
+  function formatLastPlayed(value) {
+    try {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '—';
+      return date.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch (err) {
+      return '—';
+    }
+  }
+
+  function updateLeaderboardHeaderState() {
+    const playedHeader = document.getElementById('leaderboard-played-header');
+    const nameHeader = document.getElementById('leaderboard-name-header');
+    const lastPlayedHeader = document.getElementById('leaderboard-lastplayed-header');
+
+    if (playedHeader) {
+      const indicator = playedHeader.querySelector('.sort-indicator');
+      const active = leaderboardSortBy === 'clicks';
+      playedHeader.setAttribute('aria-sort', active ? (leaderboardSortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
+      if (indicator) {
+        indicator.textContent = active ? (leaderboardSortDirection === 'desc' ? '▼' : '▲') : '';
+      }
+    }
+
+    if (nameHeader) {
+      const indicator = nameHeader.querySelector('.sort-indicator');
+      const active = leaderboardSortBy === 'name';
+      nameHeader.setAttribute('aria-sort', active ? (leaderboardSortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
+      if (indicator) {
+        indicator.textContent = active ? (leaderboardSortDirection === 'desc' ? '▼' : '▲') : '';
+      }
+    }
+
+    if (lastPlayedHeader) {
+      const indicator = lastPlayedHeader.querySelector('.sort-indicator');
+      const active = leaderboardSortBy === 'lastPlayed';
+      lastPlayedHeader.setAttribute('aria-sort', active ? (leaderboardSortDirection === 'desc' ? 'descending' : 'ascending') : 'none');
+      if (indicator) {
+        indicator.textContent = active ? (leaderboardSortDirection === 'desc' ? '▼' : '▲') : '';
+      }
+    }
   }
 
   // ── Surprise Me Interactivity ─────────────────────────────────────────────
@@ -197,6 +338,7 @@
         let currentClicks = parseInt(localStorage.getItem(clicksKey)) || 0;
         currentClicks++;
         localStorage.setItem(clicksKey, currentClicks);
+        localStorage.setItem(`lastPlayed_${id}`, new Date().toISOString());
       }
 
       renderGrid();

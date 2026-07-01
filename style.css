@@ -192,6 +192,29 @@ body {
   }
 }
 
+@media (min-width: 901px) {
+  .filter-collapse {
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+
+  .filter-collapse summary {
+    display: none;
+  }
+
+  .filter-panel {
+    display: flex !important;
+    margin-top: 0;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .controls-toolbar {
+    padding: 10px 14px;
+  }
+}
+
 /* Form Fields */
 .search-box input[type="text"],
 .filter-box select {
@@ -441,6 +464,20 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.5px;
   border-bottom: 1px solid var(--border);
+}
+
+.sortable-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-header:hover {
+  color: var(--accent);
+}
+
+.sortable-header .sort-indicator {
+  margin-left: 0.35rem;
+  font-size: 0.9rem;
 }
 
 .ranking-table tbody tr {
