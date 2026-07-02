@@ -20,7 +20,7 @@
     ],
     "duration": "Medium",
     "daily_essential": true,
-    "description": "Guess the year and location of historical photographs.",
+    "description": "(10am) Guess the year and location of historical photographs.",
     "url": "https://timeguessr.com/",
     "mechanic": "map navigation"
   },
