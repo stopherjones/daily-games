@@ -20,7 +20,7 @@
     ],
     "duration": "Medium",
     "daily_essential": true,
-    "description": "(10am) Guess the year and location of historical photographs.",
+    "description": "(From 9am) Guess the year and location of historical photographs.",
     "url": "https://timeguessr.com/",
     "mechanic": "map navigation"
   },
@@ -68,7 +68,7 @@
     ],
     "duration": "Medium",
     "daily_essential": true,
-    "description": "Daily (10am) quizzes on a variety of themes and mechanics.",
+    "description": "(From 10am) Daily quizzes on a variety of themes and mechanics.",
     "url": "https://dailyorbs.com/",
     "mechanic": "quiz"
   },
@@ -253,15 +253,51 @@
     "mechanic": "zero-in guessing"
   },
   {
-    "id": "guessandmatch",
-    "name": "Guess and Match",
+    "id": "guessandmatch-carbrand",
+    "name": "G&M car brand",
     "category": [
-      "trivia"
+      "cars"
     ],
-    "duration": "Deeper thinking",
+    "duration": "Medium",
     "daily_essential": true,
-    "description": "Various guessing games and other trivia challenges.",
-    "url": "https://guessandmatch.com/daily/categories",
+    "description": "Work out the car brand by narrowing down across a range of categories.",
+    "url": "https://guessandmatch.com/daily/carbrand",
+    "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "guessandmatch-country",
+    "name": "G&M country",
+    "category": [
+      "geography"
+    ],
+    "duration": "Medium",
+    "daily_essential": true,
+    "description": "Work out the country by narrowing down a range of categories.",
+    "url": "https://guessandmatch.com/daily/worldcountry",
+    "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "guessandmatch-ussportsteam",
+    "name": "G&M US sport team",
+    "category": [
+      "sports"
+    ],
+    "duration": "Medium",
+    "daily_essential": true,
+    "description": "Work out the US sport team by narrowing down a range of categories.",
+    "url": "https://guessandmatch.com/daily/sportsteam",
+    "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "guessandmatch-historicalfigure",
+    "name": "G&M historical figure",
+    "category": [
+      "history"
+    ],
+    "duration": "Medium",
+    "daily_essential": true,
+    "description": "Work out the historical figure by narrowing down a range of categories.",
+    "url": "https://guessandmatch.com/daily/historicalfigure",
     "mechanic": "zero-in guessing"
   },
   {
