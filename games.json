@@ -253,15 +253,15 @@
     "mechanic": "zero-in guessing"
   },
   {
-    "id": "guessandmatch-carbrand",
-    "name": "G&M car brand",
+    "id": "cardle",
+    "name": "Cardle",
     "category": [
       "cars"
     ],
     "duration": "Medium",
-    "daily_essential": true,
-    "description": "Work out the car brand by narrowing down across a range of categories.",
-    "url": "https://guessandmatch.com/daily/carbrand",
+    "daily_essential": false,
+    "description": "Work out the car make, model and year as the photo zooms out.",
+    "url": "https://www.playcardle.com/",
     "mechanic": "zero-in guessing"
   },
   {
