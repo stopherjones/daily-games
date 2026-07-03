@@ -60,6 +60,18 @@
   "url": "https://geographygrid.com/",
   "mechanic": "quiz"
 },
+{
+    "id": "anything-grid",
+    "name": "Anything Grid",
+    "category": [
+      "trivia"
+    ],
+    "duration": "Medium",
+    "daily_essential": false,
+    "description": "Choosethe most obscure answers to pairs of clues.",
+    "url": "https://anythinggrid.com/",
+    "mechanic": "quiz"
+  },
   {
     "id": "travle",
     "name": "travle",
