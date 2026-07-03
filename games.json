@@ -241,18 +241,6 @@
     "mechanic": "connections"
   },
   {
-    "id": "actorle",
-    "name": "Actorle",
-    "category": [
-      "films", "people"
-    ],
-    "duration": "Quick games",
-    "daily_essential": false,
-    "description": "Guess the daily actor by revealing their filmography.",
-    "url": "https://actorle.com/?homescreen=1",
-    "mechanic": "zero-in guessing"
-  },
-  {
     "id": "cardle",
     "name": "Cardle",
     "category": [
