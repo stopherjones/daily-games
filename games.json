@@ -49,6 +49,18 @@
     "mechanic": "zero-in guessing"
   },
   {
+  "id": "geogrid",
+  "name": "Geo Grid",
+  "category": [
+    "geography"
+  ],
+  "duration": "Medium",
+  "daily_essential": true,
+  "description": "Identify the countries that match the pairs of core.",
+  "url": "https://geographygrid.com/",
+  "mechanic": "quiz"
+},
+  {
     "id": "travle",
     "name": "travle",
     "category": [
