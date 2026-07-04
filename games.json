@@ -109,18 +109,6 @@
     "mechanic": "puzzle solving"
   },
   {
-    "id": "clueraider",
-    "name": "Clue Raider",
-    "category": [
-      "deduction"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Find the treasure using logic clues and sudoku deduction.",
-    "url": "https://clueraider.com/",
-    "mechanic": "puzzle solving"
-  },
-  {
     "id": "cluesbysam",
     "name": "Clues by Sam",
     "category": [
