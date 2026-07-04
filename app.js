@@ -5,9 +5,7 @@
   let currentCategory = 'all';
   let currentMechanic = 'all';
   let currentDuration = 'all';
-  let currentSortOption = 'auto';
-  let currentEssentialOnly = false;
-  let currentHideCompleted = false;
+  let currentSortOption = 'json-order';
 
   // ── Core Engine Init ───────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
@@ -108,13 +106,6 @@
     bindInput('category-filter', (v) => currentCategory = v, 'change');
     bindInput('mechanic-filter', (v) => currentMechanic = v, 'change');
     bindInput('duration-filter', (v) => currentDuration = v, 'change');
-    bindCheckbox('essential-toggle', (v) => currentEssentialOnly = v);
-    bindCheckbox('hide-completed-toggle', (v) => currentHideCompleted = v);
-
-    const randomBtn = document.getElementById('random-game-btn');
-    if (randomBtn) {
-      randomBtn.addEventListener('click', selectRandomGame);
-    }
 
     const resetDoneBtn = document.getElementById('reset-done-btn');
     if (resetDoneBtn) {
@@ -143,12 +134,8 @@
       const matchesCategory = currentCategory === 'all' || (Array.isArray(game.category) ? game.category.includes(currentCategory) : game.category === currentCategory);
       const matchesMechanic = currentMechanic === 'all' || game.mechanic === currentMechanic;
       const matchesDuration = currentDuration === 'all' || game.duration === currentDuration;
-      const matchesEssential = !currentEssentialOnly || game.daily_essential;
-      
-      const isCompleted = localStorage.getItem(`completed_${game.id}`) === 'true';
-      const matchesCompleted = !currentHideCompleted || !isCompleted;
 
-      return matchesSearch && matchesCategory && matchesMechanic && matchesDuration && matchesEssential && matchesCompleted;
+      return matchesSearch && matchesCategory && matchesMechanic && matchesDuration;
     }).sort((a, b) => {
       const aPlays = parseInt(localStorage.getItem(`clicks_${a.id}`), 10) || 0;
       const bPlays = parseInt(localStorage.getItem(`clicks_${b.id}`), 10) || 0;
@@ -156,6 +143,10 @@
       const bLast = localStorage.getItem(`lastPlayed_${b.id}`);
       const aTime = aLast ? Date.parse(aLast) : 0;
       const bTime = bLast ? Date.parse(bLast) : 0;
+
+      if (currentSortOption === 'json-order' || currentSortOption === 'auto' || !currentSortOption) {
+        return 0;
+      }
 
       switch (currentSortOption) {
         case 'plays-asc':
@@ -174,7 +165,6 @@
           if (aTime !== bTime) return bTime - aTime;
           return a.name.localeCompare(b.name);
         case 'plays-desc':
-        case 'auto':
         default:
           if (aPlays !== bPlays) return bPlays - aPlays;
           return a.name.localeCompare(b.name);
@@ -241,19 +231,6 @@
     } catch (err) {
       return '—';
     }
-  }
-
-  // ── Surprise Me Interactivity ─────────────────────────────────────────────
-  function selectRandomGame() {
-    const cards = document.querySelectorAll('.game-card:not(.state-completed)');
-    if (cards.length === 0) return;
-
-    const randomIndex = Math.floor(Math.random() * cards.length);
-    const targetCard = cards[randomIndex];
-
-    document.querySelectorAll('.game-card').forEach(c => c.classList.remove('highlighted'));
-    targetCard.classList.add('highlighted');
-    targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   function resetCompletedStatuses() {

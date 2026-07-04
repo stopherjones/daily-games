@@ -162,18 +162,8 @@ body {
     gap: 10px;
   }
 
-  .control-group,
-  .btn-accent,
-  .toggle-box {
+  .control-group {
     width: 100%;
-  }
-
-  .toggle-box {
-    justify-content: space-between;
-  }
-
-  .btn-accent {
-    margin-top: 4px;
   }
 }
 
@@ -253,45 +243,7 @@ body {
   border-color: var(--accent);
 }
 
-/* Toggle Switch Setup */
-.toggle-box label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text);
-  font-size: 0.9rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.toggle-box input[type="checkbox"] {
-  accent-color: var(--accent);
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
 /* Action Buttons */
-.btn-accent {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.1s;
-}
-
-.btn-accent:hover {
-  opacity: 0.9;
-}
-
-.btn-accent:active {
-  transform: scale(0.98);
-}
-
 .btn-reset {
   background: transparent;
   color: var(--text);
