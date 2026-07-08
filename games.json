@@ -96,7 +96,30 @@
     "url": "https://www.timdle.com/",
     "mechanic": "quiz"
   },
-  
+  {
+    "id": "cluesbysam",
+    "name": "Clues by Sam",
+    "category": [
+      "deduction"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": false,
+    "description": "Follow the logic clues to find the criminals and innocents.",
+    "url": "https://cluesbysam.com/",
+    "mechanic": "puzzle solving"
+  },
+  {
+    "id": "puzzgrid",
+    "name": "PuzzGrid",
+    "category": [
+      "general knowledge"
+    ],
+    "duration": "Medium",
+    "daily_essential": false,
+    "description": "Group sixteen items into four related conceptual connections against a tight timer.",
+    "url": "https://puzzgrid.com/",
+    "mechanic": "connections"
+  },
   {
     "id": "anything-grid",
     "name": "Anything Grid",
@@ -119,18 +142,6 @@
     "daily_essential": true,
     "description": "Classic countdown letters, numbers and conundrum games.",
     "url": "https://countdown.ftwinston.com/",
-    "mechanic": "puzzle solving"
-  },
-  {
-    "id": "cluesbysam",
-    "name": "Clues by Sam",
-    "category": [
-      "deduction"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Follow the logic clues to find the criminals and innocents.",
-    "url": "https://cluesbysam.com/",
     "mechanic": "puzzle solving"
   },
   {
@@ -216,18 +227,6 @@
     "description": "Work out the random Wikipedia article by revealing redacted words.",
     "url": "https://redactle.net/",
     "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "puzzgrid",
-    "name": "PuzzGrid",
-    "category": [
-      "general knowledge"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Group sixteen items into four related conceptual connections against a tight timer.",
-    "url": "https://puzzgrid.com/",
-    "mechanic": "connections"
   },
   {
     "id": "cardle",
