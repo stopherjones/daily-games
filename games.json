@@ -49,6 +49,18 @@
     "mechanic": "quiz"
   },
   {
+    "id": "travle",
+    "name": "travle",
+    "category": [
+      "geography"
+    ],
+    "duration": "Medium",
+    "daily_essential": false,
+    "description": "Find the fewest border crossings between two countries.",
+    "url": "https://capitalle.app/travle",
+    "mechanic": "map navigation"
+  },
+  {
     "id": "flagle",
     "name": "Flagle",
     "category": [
@@ -59,6 +71,18 @@
     "description": "Guess the country flag - each guess reveals overlapping details.",
     "url": "https://flagle-game.com/daily",
     "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "flagpie",
+    "name": "Flagpie",
+    "category": [
+      "geography"
+    ],
+    "duration": "Quick games",
+    "daily_essential": true,
+    "description": "Guess the country flag based on a pie chart of its colours.",
+    "url": "https://flagpie.net/",
+    "mechanic": "quiz"
   },
   {
     "id": "timdle",
@@ -72,18 +96,7 @@
     "url": "https://www.timdle.com/",
     "mechanic": "quiz"
   },
-  {
-    "id": "guessandmatch-ussportsteam",
-    "name": "G&M US sport team",
-    "category": [
-      "sports"
-    ],
-    "duration": "Medium",
-    "daily_essential": true,
-    "description": "Work out the US sport team by narrowing down a range of categories.",
-    "url": "https://guessandmatch.com/daily/sportsteam",
-    "mechanic": "zero-in guessing"
-  },
+  
   {
     "id": "anything-grid",
     "name": "Anything Grid",
@@ -181,18 +194,6 @@
     "mechanic": "zero-in guessing"
   },
   {
-    "id": "travle",
-    "name": "travle",
-    "category": [
-      "geography"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Find the fewest border crossings between two countries.",
-    "url": "https://capitalle.app/travle",
-    "mechanic": "map navigation"
-  },
-  {
     "id": "wikispeedrun",
     "name": "Wiki Speedrun",
     "category": [
@@ -265,6 +266,18 @@
     "mechanic": "connections"
   },
   {
+    "id": "guessandmatch-ussportsteam",
+    "name": "G&M US sport team",
+    "category": [
+      "sports"
+    ],
+    "duration": "Medium",
+    "daily_essential": true,
+    "description": "Work out the US sport team by narrowing down a range of categories.",
+    "url": "https://guessandmatch.com/daily/sportsteam",
+    "mechanic": "zero-in guessing"
+  },
+  {
     "id": "guessandmatch-country",
     "name": "G&M country",
     "category": [
@@ -324,5 +337,17 @@
     "description": "Find the hidden word - each guess is scored based on its closeness.",
     "url": "https://semantle.com/",
     "mechanic": "zero-in guessing"
+  },
+  {
+    "id": "apprendre",
+    "name": "Apprendre TV Monde",
+    "category": [
+      "french"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": false,
+    "description": "Learn French through TV clips.",
+    "url": "https://apprendre.tv5monde.com/fr",
+    "mechanic": "quiz"
   }
 ]
