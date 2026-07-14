@@ -360,5 +360,17 @@
     "description": "Learn French through TV clips.",
     "url": "https://apprendre.tv5monde.com/fr",
     "mechanic": "quiz"
+  },
+  {
+    "id": "lexisrex",
+    "name": "Lexis Rex",
+    "category": [
+      "french"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": false,
+    "description": "Various classic games to help improve your French.",
+    "url": "https://www.lexisrex.com/French",
+    "mechanic": "quiz"
   }
 ]
