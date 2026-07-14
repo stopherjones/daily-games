@@ -25,6 +25,18 @@
     "mechanic": "quiz"
   },
   {
+  "id": "niddle",
+  "name": "Niddle Games",
+  "category": [
+    "deduction"
+  ],
+  "duration": "Deeper thinking",
+  "daily_essential": true,
+  "description": "(From 10am) Daily quizzes on a variety of themes and mechanics.",
+  "url": "https://nibble.games/",
+  "mechanic": "puzzle solving"
+},
+  {
     "id": "seldom",
     "name": "Seldom",
     "category": [
