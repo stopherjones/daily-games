@@ -169,30 +169,6 @@
     "mechanic": "puzzle solving"
   },
   {
-    "id": "bandle",
-    "name": "Bandle",
-    "category": [
-      "music"
-    ],
-    "duration": "Quick games",
-    "daily_essential": true,
-    "description": "Guess the song as each instrumental layer is revealed.",
-    "url": "https://bandle.app/menu",
-    "mechanic": "listen to a song"
-  },
-  {
-    "id": "songless",
-    "name": "Songless",
-    "category": [
-      "music"
-    ],
-    "duration": "Quick games",
-    "daily_essential": true,
-    "description": "Guess the song from increasing audio snippets.",
-    "url": "https://lessgames.com/songless",
-    "mechanic": "listen to a song"
-  },
-  {
     "id": "heardle",
     "name": "Heardle",
     "category": [
