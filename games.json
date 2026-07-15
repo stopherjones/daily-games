@@ -241,30 +241,6 @@
     "mechanic": "zero-in guessing"
   },
   {
-    "id": "cardle",
-    "name": "Cardle",
-    "category": [
-      "cars"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Work out the car make, model and year as the photo zooms out.",
-    "url": "https://www.playcardle.com/",
-    "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "vroomdle",
-    "name": "Vroomdle",
-    "category": [
-      "cars"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Work out the car make, model and year as the photo zooms out.",
-    "url": "https://vroomdle.com/",
-    "mechanic": "zero-in guessing"
-  },
-  {
     "id": "carconnections",
     "name": "Car Connections",
     "category": [
@@ -286,18 +262,6 @@
     "daily_essential": true,
     "description": "Work out the US sport team by narrowing down a range of categories.",
     "url": "https://guessandmatch.com/daily/sportsteam",
-    "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "guessandmatch-country",
-    "name": "G&M country",
-    "category": [
-      "geography"
-    ],
-    "duration": "Medium",
-    "daily_essential": true,
-    "description": "Work out the country by narrowing down a range of categories.",
-    "url": "https://guessandmatch.com/daily/worldcountry",
     "mechanic": "zero-in guessing"
   },
   
