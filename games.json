@@ -35,6 +35,18 @@
   "description": "(From 10am) Daily quizzes on a variety of themes and mechanics.",
   "url": "https://nibble.games/",
   "mechanic": "puzzle solving"
+  },
+  {
+  "id": "minute-cryptic",
+  "name": "Minute Cryptic",
+  "category": [
+    "crossword"
+  ],
+  "duration": "Medium",
+  "daily_essential": true,
+  "description": "Solve the daily cryptic crossword clue.",
+  "url": "https://www.minutecryptic.com/",
+  "mechanic": "quiz"
 },
   {
     "id": "seldom",
@@ -73,18 +85,6 @@
     "mechanic": "map navigation"
   },
   {
-    "id": "flagle",
-    "name": "Flagle",
-    "category": [
-      "geography"
-    ],
-    "duration": "Quick games",
-    "daily_essential": true,
-    "description": "Guess the country flag - each guess reveals overlapping details.",
-    "url": "https://flagle-game.com/daily",
-    "mechanic": "zero-in guessing"
-  },
-  {
     "id": "flagpie",
     "name": "Flagpie",
     "category": [
@@ -95,6 +95,18 @@
     "description": "Guess the country flag based on a pie chart of its colours.",
     "url": "https://flagpie.net/",
     "mechanic": "quiz"
+  },
+  {
+    "id": "flagle",
+    "name": "Flagle",
+    "category": [
+      "geography"
+    ],
+    "duration": "Quick games",
+    "daily_essential": true,
+    "description": "Guess the country flag - each guess reveals overlapping details.",
+    "url": "https://flagle-game.com/daily",
+    "mechanic": "zero-in guessing"
   },
   {
     "id": "timdle",
@@ -127,22 +139,10 @@
       "general knowledge"
     ],
     "duration": "Medium",
-    "daily_essential": false,
+    "daily_essential": true,
     "description": "Group sixteen items into four related conceptual connections against a tight timer.",
     "url": "https://puzzgrid.com/",
     "mechanic": "connections"
-  },
-  {
-    "id": "anything-grid",
-    "name": "Anything Grid",
-    "category": [
-      "trivia"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Choosethe most obscure answers to pairs of clues.",
-    "url": "https://anythinggrid.com/",
-    "mechanic": "quiz"
   },
   {
     "id": "countdown",
@@ -155,6 +155,18 @@
     "description": "Classic countdown letters, numbers and conundrum games.",
     "url": "https://countdown.ftwinston.com/",
     "mechanic": "puzzle solving"
+  },
+  {
+    "id": "anything-grid",
+    "name": "Anything Grid",
+    "category": [
+      "trivia"
+    ],
+    "duration": "Medium",
+    "daily_essential": false,
+    "description": "Choosethe most obscure answers to pairs of clues.",
+    "url": "https://anythinggrid.com/",
+    "mechanic": "quiz"
   },
   {
     "id": "pokle",
