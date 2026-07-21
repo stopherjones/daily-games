@@ -1,5 +1,17 @@
 [
   {
+    "id": "cardle",
+    "name": "Cardle",
+    "category": [
+      "cars"
+    ],
+    "duration": "Quick games",
+    "daily_essential": true,
+    "description": "Daily car guessing game from photo and clues.",
+    "url": "https://stopherjones.github.io/cardle/",
+    "mechanic": "zero-in guessing"
+  },
+  {
     "id": "timeguessr",
     "name": "Timeguessr",
     "category": [
@@ -32,7 +44,7 @@
   ],
   "duration": "Deeper thinking",
   "daily_essential": true,
-  "description": "(From 10am) Daily quizzes on a variety of themes and mechanics.",
+  "description": "Daily city locator, wordle grid and logic puzzles.",
   "url": "https://nibble.games/",
   "mechanic": "puzzle solving"
   },
