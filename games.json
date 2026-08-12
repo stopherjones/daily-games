@@ -59,7 +59,7 @@
   "description": "Solve the daily cryptic crossword clue.",
   "url": "https://www.minutecryptic.com/",
   "mechanic": "quiz"
-},
+  },
   {
     "id": "seldom",
     "name": "Seldom",
@@ -145,6 +145,18 @@
     "mechanic": "puzzle solving"
   },
   {
+    "id": "gerrymandle",
+    "name": "Gerrymandle",
+    "category": [
+      "logic"
+    ],
+    "duration": "Medium",
+    "daily_essential": false,
+    "description": "Draw up voting districts to win the election for the specified party!.",
+    "url": "https://gerrymandle.com/",
+    "mechanic": "puzzle"
+  },
+  {
     "id": "puzzgrid",
     "name": "PuzzGrid",
     "category": [
@@ -169,18 +181,6 @@
     "mechanic": "puzzle solving"
   },
   {
-    "id": "anything-grid",
-    "name": "Anything Grid",
-    "category": [
-      "trivia"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Choosethe most obscure answers to pairs of clues.",
-    "url": "https://anythinggrid.com/",
-    "mechanic": "quiz"
-  },
-  {
     "id": "pokle",
     "name": "Pokle",
     "category": [
@@ -203,18 +203,6 @@
     "description": "Guess the song from increasing audio snippets.",
     "url": "https://www.heardle.info",
     "mechanic": "listen to a song"
-  },
-  {
-    "id": "geodle",
-    "name": "Geodle",
-    "category": [
-      "geography"
-    ],
-    "duration": "Quick games",
-    "daily_essential": false,
-    "description": "Work out the country from continent, population, and other clues.",
-    "url": "https://geodle.me/",
-    "mechanic": "zero-in guessing"
   },
   {
     "id": "wikispeedrun",
