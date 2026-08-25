@@ -5,7 +5,7 @@
   let currentCategory = 'all';
   let currentMechanic = 'all';
   let currentDuration = 'all';
-  let currentSortOption = 'json-order';
+  let currentSortOption = 'plays-desc'; // Default sort set to play count (high to low)
 
   // ── Core Engine Init ───────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
@@ -40,6 +40,13 @@
       populateMechanics();
       populateDurations();
       initEventListeners();
+
+      // Synchronise the HTML sort dropdown with the default state
+      const sortSelect = document.getElementById('sort-filter');
+      if (sortSelect) {
+        sortSelect.value = currentSortOption;
+      }
+
       renderGrid();
     } catch (error) {
       console.error('Failed to load games data:', error);
@@ -262,8 +269,6 @@
       renderGrid();
     },
     trackClick: function(id) {
-      // Keep the original click tracker available if needed,
-      // but do not increment on link clicks by default.
       const key = `clicks_${id}`;
       let currentClicks = parseInt(localStorage.getItem(key)) || 0;
       currentClicks++;
@@ -280,7 +285,6 @@
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
-  // Changed to correctly clean up single quotes if they show up in programmatic fields
   function escAttr(str) {
     if (!str) return '';
     return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
