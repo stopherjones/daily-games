@@ -73,6 +73,18 @@
     "mechanic": "quiz"
   },
   {
+    "id": "fallen-london",
+    "name": "Fallen London",
+    "category": [
+      "rpg"
+    ],
+    "duration": "Deeper thinking",
+    "daily_essential": false,
+    "description": "RPG set in Victorian London.",
+    "url": "https://www.fallenlondon.com/",
+    "mechanic": "rpg"
+  },
+  {
     "id": "geogrid",
     "name": "Geo Grid",
     "category": [
