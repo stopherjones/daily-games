@@ -73,30 +73,6 @@
     "mechanic": "quiz"
   },
   {
-    "id": "fallen-london",
-    "name": "Fallen London",
-    "category": [
-      "rpg"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "RPG set in Victorian London.",
-    "url": "https://www.fallenlondon.com/",
-    "mechanic": "rpg"
-  },
-  {
-    "id": "geogrid",
-    "name": "Geo Grid",
-    "category": [
-      "geography"
-  ],
-    "duration": "Medium",
-    "daily_essential": true,
-    "description": "Identify the countries that match the pairs of core.",
-    "url": "https://geographygrid.com/",
-    "mechanic": "quiz"
-  },
-  {
     "id": "travle",
     "name": "travle",
     "category": [
@@ -157,18 +133,6 @@
     "mechanic": "puzzle solving"
   },
   {
-    "id": "gerrymandle",
-    "name": "Gerrymandle",
-    "category": [
-      "logic"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Draw up voting districts to win the election for the specified party!.",
-    "url": "https://gerrymandle.com/",
-    "mechanic": "puzzle"
-  },
-  {
     "id": "puzzgrid",
     "name": "PuzzGrid",
     "category": [
@@ -217,67 +181,6 @@
     "mechanic": "listen to a song"
   },
   {
-    "id": "wikispeedrun",
-    "name": "Wiki Speedrun",
-    "category": [
-      "wikipedia"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "Navigate between Wikipedia entries in the fewest possible link clicks.",
-    "url": "https://wikispeedrun.io/",
-    "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "redactle",
-    "name": "Redactle",
-    "category": [
-      "wikipedia"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Work out the random Wikipedia article by revealing redacted words.",
-    "url": "https://redactle.net/",
-    "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "carconnections",
-    "name": "Car Connections",
-    "category": [
-      "cars"
-    ],
-    "duration": "Medium",
-    "daily_essential": false,
-    "description": "(Every Tuesday) Find groups of automotive facts, specs, or models that share an underlying theme.",
-    "url": "https://dailycarquiz.com/carconnections",
-    "mechanic": "connections"
-  },
-  {
-    "id": "guessandmatch-ussportsteam",
-    "name": "G&M US sport team",
-    "category": [
-      "sports"
-    ],
-    "duration": "Medium",
-    "daily_essential": true,
-    "description": "Work out the US sport team by narrowing down a range of categories.",
-    "url": "https://guessandmatch.com/daily/sportsteam",
-    "mechanic": "zero-in guessing"
-  },
-  
-  {
-    "id": "guessandmatch-historicalfigure",
-    "name": "G&M historical figure",
-    "category": [
-      "history"
-    ],
-    "duration": "Medium",
-    "daily_essential": true,
-    "description": "Work out the historical figure by narrowing down a range of categories.",
-    "url": "https://guessandmatch.com/daily/historicalfigure",
-    "mechanic": "zero-in guessing"
-  },
-  {
     "id": "guardian-cryptic",
     "name": "Guardian Cryptic",
     "category": [
@@ -288,30 +191,6 @@
     "description": "Daily cryptic crosswords.",
     "url": "https://www.theguardian.com/crosswords/series/cryptic",
     "mechanic": "crossword"
-  },
-  {
-    "id": "nounable",
-    "name": "Nounable",
-    "category": [
-      "words"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Find the hidden proper noun - each guess is scored based on its closeness.",
-    "url": "https://nounable.me/",
-    "mechanic": "zero-in guessing"
-  },
-  {
-    "id": "semantle",
-    "name": "Semantle",
-    "category": [
-      "words"
-    ],
-    "duration": "Deeper thinking",
-    "daily_essential": false,
-    "description": "Find the hidden word - each guess is scored based on its closeness.",
-    "url": "https://semantle.com/",
-    "mechanic": "zero-in guessing"
   },
   {
     "id": "apprendre",
