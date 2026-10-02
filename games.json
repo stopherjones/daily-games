@@ -177,7 +177,7 @@
     "duration": "Quick games",
     "daily_essential": true,
     "description": "Guess the song from increasing audio snippets.",
-    "url": "https://www.heardle.info",
+    "url": "https://www.heardle.info/daily",
     "mechanic": "listen to a song"
   },
   {
