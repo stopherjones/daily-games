@@ -61,18 +61,6 @@
   "mechanic": "quiz"
   },
   {
-    "id": "seldom",
-    "name": "Seldom",
-    "category": [
-      "general knowledge"
-    ],
-    "duration": "Quick games",
-    "daily_essential": true,
-    "description": "Find the pointless answers for today's topic.",
-    "url": "https://www.playseldom.com/",
-    "mechanic": "quiz"
-  },
-  {
     "id": "travle",
     "name": "travle",
     "category": [
