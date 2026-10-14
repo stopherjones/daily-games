@@ -85,6 +85,18 @@
     "mechanic": "map navigation"
   },
   {
+    "id": "globehoppr",
+    "name": "GlobeHoppr",
+    "category": [
+      "geography"
+    ],
+    "duration": "Medium",
+    "daily_essential": false,
+    "description": "Find the fewest short hops between two cities.",
+    "url": "https://globehoppr.com/",
+    "mechanic": "map navigation"
+  },
+  {
     "id": "flagpie",
     "name": "Flagpie",
     "category": [
